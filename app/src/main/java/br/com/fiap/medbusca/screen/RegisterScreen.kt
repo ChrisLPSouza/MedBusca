@@ -67,6 +67,11 @@ fun RegisterScreen() {
 
     ) { innerPadding ->
         val checkedState = remember { mutableStateOf(true) }
+        var nomeReceita = remember{ mutableStateOf("") }
+        var medicamento = remember{ mutableStateOf("") }
+        var dataEmissao = remember{ mutableStateOf("") }
+        var posologia = remember{ mutableStateOf("") }
+
         FlowColumn(
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier
@@ -78,8 +83,8 @@ fun RegisterScreen() {
                 modifier = Modifier
                     .padding(top = 16.dp, start = 16.dp, end = 16.dp)
                     .fillMaxWidth(),
-                value = text,
-                onValueChange = { text = it },
+                value = nomeReceita.value,
+                onValueChange = { nomeReceita.value = it },
                 label = { Text("Nome da Receita") }
 
             )
@@ -88,8 +93,8 @@ fun RegisterScreen() {
                 modifier = Modifier
                     .padding(top = 8.dp, start = 16.dp, end = 16.dp)
                     .fillMaxWidth(),
-                value = text,
-                onValueChange = { text = it },
+                value = medicamento.value,
+                onValueChange = { medicamento.value = it },
                 label = { Text("Medicamento") }
             )
 
@@ -97,8 +102,8 @@ fun RegisterScreen() {
                 modifier = Modifier
                     .padding(top = 8.dp, start = 16.dp, end = 16.dp)
                     .fillMaxWidth(),
-                value = text,
-                onValueChange = { text = it },
+                value = dataEmissao.value,
+                onValueChange = { dataEmissao.value = it },
                 label = { Text("Data de Emissão") }
             )
 
@@ -106,8 +111,8 @@ fun RegisterScreen() {
                 modifier = Modifier
                     .padding(top = 8.dp, start = 16.dp, end = 16.dp)
                     .fillMaxWidth(),
-                value = text,
-                onValueChange = { text = it },
+                value = posologia.value,
+                onValueChange = { posologia.value = it },
                 label = { Text("Posologia") }
             )
 
@@ -133,7 +138,7 @@ fun RegisterScreen() {
                 Text(
                     modifier = Modifier
                         .align(alignment = Alignment.CenterVertically),
-                    text = "Selecionar esta caixa se o tratamento for continuo.",
+                    text = "Selecionar esta caixa se o tratamento for contínuo.",
                     fontSize = 12.sp
                 )
 
