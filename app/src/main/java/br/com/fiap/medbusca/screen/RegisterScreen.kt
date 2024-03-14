@@ -1,6 +1,8 @@
 package br.com.fiap.medbusca.screen
 
 import android.annotation.SuppressLint
+import android.graphics.Color
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowColumn
@@ -12,6 +14,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -33,6 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
@@ -56,34 +60,23 @@ fun RegisterScreen() {
                     titleContentColor = MaterialTheme.colorScheme.primary,
                 ),
                 title = {
-                    Text("MedBusca")
+                    Text("Cadastrar Receita")
                 }
             )
         }
 
     ) { innerPadding ->
+        val checkedState = remember { mutableStateOf(true) }
         FlowColumn(
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier
                 .padding(top = 70.dp)
                 .fillMaxWidth()
         ) {
-            Text(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .fillMaxWidth(),
-                text = "Cadastrar Receita"
-
-            )
-//            Text(
-//                modifier = Modifier
-//                    .padding(16.dp)
-//                    .fillMaxWidth(),
-//                text = "Nome da receita"
-//            )
+            
             OutlinedTextField(
                 modifier = Modifier
-                    .padding(16.dp)
+                    .padding(top = 16.dp, start = 16.dp, end = 16.dp)
                     .fillMaxWidth(),
                 value = text,
                 onValueChange = { text = it },
@@ -98,7 +91,7 @@ fun RegisterScreen() {
 //            )
             OutlinedTextField(
                 modifier = Modifier
-                    .padding(16.dp)
+                    .padding(top = 8.dp, start = 16.dp, end = 16.dp)
                     .fillMaxWidth(),
                 value = text,
                 onValueChange = { text = it },
@@ -113,7 +106,7 @@ fun RegisterScreen() {
 //            )
             OutlinedTextField(
                 modifier = Modifier
-                    .padding(16.dp)
+                    .padding(top = 8.dp, start = 16.dp, end = 16.dp)
                     .fillMaxWidth(),
                 value = text,
                 onValueChange = { text = it },
@@ -128,27 +121,41 @@ fun RegisterScreen() {
 //            )
             OutlinedTextField(
                 modifier = Modifier
-                    .padding(16.dp)
+                    .padding(top = 8.dp, start = 16.dp, end = 16.dp)
                     .fillMaxWidth(),
                 value = text,
                 onValueChange = { text = it },
                 label = { Text("Posologia") }
             )
+
             Text(
                 modifier = Modifier
-                    .padding(16.dp)
+                    .padding(top = 16.dp, start = 16.dp, end = 16.dp)
                     .fillMaxWidth(),
-                text = "Uso Contínuo"
+                text = "Uso Contínuo?"
 
             )
-            OutlinedTextField(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .fillMaxWidth(),
-                value = text,
-                onValueChange = { text = it },
-                label = { Text("Selecionar esta caixa se o tratamento for contínuo.") }
-            )
+            FlowRow(
+                modifier = Modifier.fillMaxWidth()
+                    .padding(top = 4.dp, start = 16.dp, end = 16.dp)
+                    .align(Alignment.Start),
+                verticalArrangement = Arrangement.Center) {
+
+                Checkbox(
+                    checked = checkedState.value,
+                    onCheckedChange = { checkedState.value = it},
+                    modifier = Modifier
+                )
+
+                Text(
+                    modifier = Modifier
+                        .align(alignment = Alignment.CenterVertically),
+                    text = "Selecionar esta caixa se o tratamento for continuo.",
+                    fontSize = 12.sp
+                )
+
+            }
+
 
             FlowRow(
                 modifier = Modifier
@@ -159,27 +166,47 @@ fun RegisterScreen() {
 
             }
             Button(
-                modifier = Modifier.width(150.dp),
+                modifier = Modifier
+                    .padding (start= 50.dp,bottom = 16.dp)
+                    .width(290.dp),
                 onClick = { }) {
                 Text("Cadastrar")
             }
+            Text(
+                modifier = Modifier
+                    .padding(start = 10.dp),
+                text = "Receituário de antimicrobiano",
+                fontSize = 16.sp
+            )
             OutlinedButton(
                 modifier = Modifier
-                    .padding(end = 10.dp)
+                    .padding(start = 230.dp)
                     .width(150.dp),
                 onClick = { }) {
                 Text("Consultar")
             }
+            Text(
+                modifier = Modifier
+                    .padding(start = 10.dp),
+                text = "Receituário da Dra Ana",
+                fontSize = 16.sp
+            )
             OutlinedButton(
                 modifier = Modifier
-                    .padding(end = 10.dp)
+                    .padding(start = 230.dp)
                     .width(150.dp),
                 onClick = { }) {
                 Text("Consultar")
             }
+            Text(
+                modifier = Modifier
+                    .padding(start = 10.dp),
+                text = "Remédio para diabetes",
+                fontSize = 16.sp
+            )
             OutlinedButton(
                 modifier = Modifier
-                    .padding(end = 10.dp)
+                    .padding(start = 230.dp)
                     .width(150.dp),
                 onClick = { }) {
                 Text("Consultar")
