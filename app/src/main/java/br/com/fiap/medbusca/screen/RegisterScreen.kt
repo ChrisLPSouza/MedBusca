@@ -73,7 +73,7 @@ fun RegisterScreen() {
                 .padding(top = 70.dp)
                 .fillMaxWidth()
         ) {
-            
+
             OutlinedTextField(
                 modifier = Modifier
                     .padding(top = 16.dp, start = 16.dp, end = 16.dp)
@@ -83,12 +83,7 @@ fun RegisterScreen() {
                 label = { Text("Nome da Receita") }
 
             )
-//            Text(
-//                modifier = Modifier
-//                    .padding(16.dp)
-//                    .fillMaxWidth(),
-//                text = "Medicamento"
-//            )
+
             OutlinedTextField(
                 modifier = Modifier
                     .padding(top = 8.dp, start = 16.dp, end = 16.dp)
@@ -97,13 +92,7 @@ fun RegisterScreen() {
                 onValueChange = { text = it },
                 label = { Text("Medicamento") }
             )
-//            Text(
-//                modifier = Modifier
-//                    .padding(16.dp)
-//                    .fillMaxWidth(),
-//                text = "Data de Emissão"
-//
-//            )
+
             OutlinedTextField(
                 modifier = Modifier
                     .padding(top = 8.dp, start = 16.dp, end = 16.dp)
@@ -112,13 +101,7 @@ fun RegisterScreen() {
                 onValueChange = { text = it },
                 label = { Text("Data de Emissão") }
             )
-//            Text(
-//                modifier = Modifier
-//                    .padding(16.dp)
-//                    .fillMaxWidth(),
-//                text = "Posologia"
-//
-//            )
+
             OutlinedTextField(
                 modifier = Modifier
                     .padding(top = 8.dp, start = 16.dp, end = 16.dp)
@@ -185,33 +168,7 @@ fun RegisterScreen() {
                 onClick = { }) {
                 Text("Consultar")
             }
-            Text(
-                modifier = Modifier
-                    .padding(start = 10.dp),
-                text = "Receituário da Dra Ana",
-                fontSize = 16.sp
-            )
-            OutlinedButton(
-                modifier = Modifier
-                    .padding(start = 230.dp)
-                    .width(150.dp),
-                onClick = { }) {
-                Text("Consultar")
-            }
-            Text(
-                modifier = Modifier
-                    .padding(start = 10.dp),
-                text = "Remédio para diabetes",
-                fontSize = 16.sp
-            )
-            OutlinedButton(
-                modifier = Modifier
-                    .padding(start = 230.dp)
-                    .width(150.dp),
-                onClick = { }) {
-                Text("Consultar")
-            }
-
+            
         }
     }
 
@@ -221,3 +178,4 @@ fun RegisterScreen() {
 fun RegisterScreenPreview() {
     RegisterScreen()
 }
+
