@@ -1,21 +1,20 @@
 package br.com.fiap.medbusca
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import br.com.fiap.medbusca.screen.LoginScreen
-import br.com.fiap.medbusca.screen.RegisterScreen
-import br.com.fiap.medbusca.screen.SearchScreen
+import br.com.fiap.medbusca.screen.HomeScreen
+import br.com.fiap.medbusca.screen.ResultsScreen
 import br.com.fiap.medbusca.ui.theme.MedBuscaTheme
 
 class MainActivity : ComponentActivity() {
+    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -26,8 +25,9 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     //LoginScreen()
-                    RegisterScreen()
-                    //SearchScreen()
+                    //RegisterScreen()
+                    //ResultsScreen()
+                    HomeScreen()
                 }
             }
         }

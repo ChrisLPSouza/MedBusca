@@ -39,7 +39,7 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun LoginScreen() {
-    var text by remember { mutableStateOf("Digite seu email") }
+    var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
     Scaffold(
@@ -76,10 +76,10 @@ fun LoginScreen() {
             )
             OutlinedTextField(
                 modifier = Modifier.padding(16.dp).fillMaxWidth(),
-                value = text,
-                onValueChange = { text = it },
-                label = { Text("Email") }
-
+                value = email,
+                onValueChange = { email = it },
+                label = { Text("Email") },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
             )
             OutlinedTextField(
                 modifier = Modifier.padding(16.dp).fillMaxWidth(),
