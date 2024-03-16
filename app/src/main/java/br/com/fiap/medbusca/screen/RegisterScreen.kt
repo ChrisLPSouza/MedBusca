@@ -42,7 +42,10 @@ import androidx.compose.ui.unit.sp
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun RegisterScreen() {
-    var text by remember { mutableStateOf("") }
+    var nomeReceita by remember{ mutableStateOf("") }
+    var medicamento by remember{ mutableStateOf("") }
+    var dataEmissao by remember{ mutableStateOf("") }
+    var posologia by remember{ mutableStateOf("") }
 
     Scaffold(
         topBar = {
@@ -66,11 +69,7 @@ fun RegisterScreen() {
         }
 
     ) { innerPadding ->
-        val checkedState = remember { mutableStateOf(true) }
-        var nomeReceita = remember{ mutableStateOf("") }
-        var medicamento = remember{ mutableStateOf("") }
-        var dataEmissao = remember{ mutableStateOf("") }
-        var posologia = remember{ mutableStateOf("") }
+        var checkedState by remember { mutableStateOf(true) }
 
         FlowColumn(
             horizontalArrangement = Arrangement.Center,
@@ -83,8 +82,8 @@ fun RegisterScreen() {
                 modifier = Modifier
                     .padding(top = 16.dp, start = 16.dp, end = 16.dp)
                     .fillMaxWidth(),
-                value = nomeReceita.value,
-                onValueChange = { nomeReceita.value = it },
+                value = nomeReceita,
+                onValueChange = { nomeReceita = it },
                 label = { Text("Nome da Receita") }
 
             )
@@ -93,8 +92,8 @@ fun RegisterScreen() {
                 modifier = Modifier
                     .padding(top = 8.dp, start = 16.dp, end = 16.dp)
                     .fillMaxWidth(),
-                value = medicamento.value,
-                onValueChange = { medicamento.value = it },
+                value = medicamento,
+                onValueChange = { medicamento = it },
                 label = { Text("Medicamento") }
             )
 
@@ -102,8 +101,8 @@ fun RegisterScreen() {
                 modifier = Modifier
                     .padding(top = 8.dp, start = 16.dp, end = 16.dp)
                     .fillMaxWidth(),
-                value = dataEmissao.value,
-                onValueChange = { dataEmissao.value = it },
+                value = dataEmissao,
+                onValueChange = { dataEmissao = it },
                 label = { Text("Data de Emissão") }
             )
 
@@ -111,8 +110,8 @@ fun RegisterScreen() {
                 modifier = Modifier
                     .padding(top = 8.dp, start = 16.dp, end = 16.dp)
                     .fillMaxWidth(),
-                value = posologia.value,
-                onValueChange = { posologia.value = it },
+                value = posologia,
+                onValueChange = { posologia = it },
                 label = { Text("Posologia") }
             )
 
@@ -130,8 +129,8 @@ fun RegisterScreen() {
                 verticalArrangement = Arrangement.Center) {
 
                 Checkbox(
-                    checked = checkedState.value,
-                    onCheckedChange = { checkedState.value = it},
+                    checked = checkedState,
+                    onCheckedChange = { checkedState = it},
                     modifier = Modifier
                 )
 
