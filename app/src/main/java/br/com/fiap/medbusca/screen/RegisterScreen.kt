@@ -160,24 +160,12 @@ fun RegisterScreen() {
                 onClick = { }) {
                 Text("Cadastrar")
             }
-            Text(
-                modifier = Modifier
-                    .padding(start = 10.dp),
-                text = "Receituário de antimicrobiano",
-                fontSize = 16.sp
-            )
-            OutlinedButton(
-                modifier = Modifier
-                    .padding(start = 230.dp)
-                    .width(150.dp),
-                onClick = { }) {
-                Text("Consultar")
-            }
+            
             
         }
     }
 
-    }
+}
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun RegisterScreenPreview() {
