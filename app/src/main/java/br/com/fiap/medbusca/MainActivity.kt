@@ -9,10 +9,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import br.com.fiap.medbusca.screen.HomeReceitas
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import br.com.fiap.medbusca.screen.HomeScreen
+import br.com.fiap.medbusca.screen.LoginScreen
+import br.com.fiap.medbusca.screen.RegisterScreen
 import br.com.fiap.medbusca.screen.ResultsScreen
-
 import br.com.fiap.medbusca.ui.theme.MedBuscaTheme
 
 class MainActivity : ComponentActivity() {
@@ -26,11 +29,21 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    //LoginScreen()
-                    //RegisterScreen()
-                    HomeScreen()
-                    //HomeReceitas()
-
+                    val navController = rememberNavController()
+                    NavHost(navController = navController, startDestination = "login") {
+                        composable(route = "login") {
+                            LoginScreen(navController)
+                        }
+                        composable(route = "home") {
+                            HomeScreen(navController)
+                        }
+                        composable(route = "register") {
+                            RegisterScreen(navController)
+                        }
+                        composable(route = "results") {
+                            ResultsScreen(navController)
+                        }
+                    }
                 }
             }
         }

@@ -37,11 +37,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
-fun RegisterScreen() {
+fun RegisterScreen(navController: NavController) {
     var nomeReceita by remember{ mutableStateOf("") }
     var medicamento by remember{ mutableStateOf("") }
     var dataEmissao by remember{ mutableStateOf("") }
@@ -165,9 +166,9 @@ fun RegisterScreen() {
     }
 
 }
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun RegisterScreenPreview() {
-    RegisterScreen()
-}
+//@Preview(showBackground = true, showSystemUi = true)
+//@Composable
+//fun RegisterScreenPreview() {
+//    RegisterScreen()
+//}
 

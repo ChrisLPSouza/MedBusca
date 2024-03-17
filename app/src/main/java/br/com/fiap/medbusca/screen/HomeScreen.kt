@@ -35,12 +35,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @RequiresApi(Build.VERSION_CODES.R)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -85,7 +86,7 @@ fun HomeScreen() {
                         modifier = Modifier
                             .padding(start = 30.dp)
                             .width(150.dp),
-                        onClick = { }) {
+                        onClick = { navController.navigate("register") }) {
                         Text("Cadastrar")
                     }
                 }
@@ -106,7 +107,7 @@ fun HomeScreen() {
                     value = nomeMedicamento,
                     onValueChange = { nomeMedicamento = it },
                     label = { Text("Onde tem?") },
-                    placeholder = { Text("Digite aqui qual medicamento está procurando")}
+                    placeholder = { Text("Digite aqui qual medicamento está procurando") }
                 )
             }
             FlowRow() {
@@ -114,7 +115,7 @@ fun HomeScreen() {
                     modifier = Modifier
                         .padding(start = 30.dp)
                         .width(150.dp),
-                    onClick = { }) {
+                    onClick = { navController.navigate("results") }) {
                     Text("Buscar")
                 }
             }
@@ -133,7 +134,7 @@ fun HomeScreen() {
                             .height(110.dp)
                             .width(200.dp),
                         colors = CardDefaults.cardColors(containerColor = Color.LightGray)
-                        ){
+                    ) {
                         Text(
                             modifier = Modifier
                                 .padding(start = 10.dp),
@@ -148,7 +149,7 @@ fun HomeScreen() {
                             .height(110.dp)
                             .width(200.dp),
                         colors = CardDefaults.cardColors(containerColor = Color.Blue)
-                    ){
+                    ) {
                         Text(
                             modifier = Modifier
                                 .padding(start = 10.dp),
@@ -160,13 +161,13 @@ fun HomeScreen() {
             }
 
 
-
         }
     }
 }
-@RequiresApi(Build.VERSION_CODES.R)
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun HomeScreenPreview() {
-    HomeScreen()
-}
+
+//@RequiresApi(Build.VERSION_CODES.R)
+//@Preview(showBackground = true, showSystemUi = true)
+//@Composable
+// HomeScreenPreview() {
+//    HomeScreen()
+//}

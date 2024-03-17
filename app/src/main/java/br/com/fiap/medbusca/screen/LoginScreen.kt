@@ -34,55 +34,63 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
-fun LoginScreen() {
+fun LoginScreen(navController: NavController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
     Scaffold(
-            topBar = {
-                TopAppBar(
-                    navigationIcon = {
-                        IconButton(onClick = { /* do something */ }) {
-                            Icon(
-                                imageVector = Icons.Filled.Create,
-                                contentDescription = "Localized description"
-                            )
-                        }
-                    },
-                    colors = topAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer,
-                        titleContentColor = MaterialTheme.colorScheme.primary,
-                    ),
-                    title = {
-                        Text("MedBusca")
+        topBar = {
+            TopAppBar(
+                navigationIcon = {
+                    IconButton(onClick = { /* do something */ }) {
+                        Icon(
+                            imageVector = Icons.Filled.Create,
+                            contentDescription = "Localized description"
+                        )
                     }
-                )
-            }
+                },
+                colors = topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.primary,
+                ),
+                title = {
+                    Text("MedBusca")
+                }
+            )
+        }
 
-        ) { innerPadding ->
+    ) { innerPadding ->
         FlowColumn(
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier
-            .padding(top = 70.dp)
-            .fillMaxWidth()) {
+                .padding(top = 70.dp)
+                .fillMaxWidth()
+        ) {
             Text(
-                modifier = Modifier.padding(16.dp).fillMaxWidth(),
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
                 text = "Bem-vindo ao Med!"
 
             )
             OutlinedTextField(
-                modifier = Modifier.padding(16.dp).fillMaxWidth(),
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
                 value = email,
                 onValueChange = { email = it },
                 label = { Text("Email") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
             )
             OutlinedTextField(
-                modifier = Modifier.padding(16.dp).fillMaxWidth(),
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
                 value = password,
                 onValueChange = { password = it },
                 label = { Text("Enter password") },
@@ -90,13 +98,17 @@ fun LoginScreen() {
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
             )
             Text(
-                modifier = Modifier.padding(16.dp).fillMaxWidth(),
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
                 text = "Esqueceu a senha?"
 
             )
-            FlowRow(modifier = Modifier
-                .padding(top = 20.dp)
-                .align(Alignment.CenterHorizontally)) {
+            FlowRow(
+                modifier = Modifier
+                    .padding(top = 20.dp)
+                    .align(Alignment.CenterHorizontally)
+            ) {
 
                 OutlinedButton(
                     modifier = Modifier
@@ -107,7 +119,7 @@ fun LoginScreen() {
                 }
                 Button(
                     modifier = Modifier.width(150.dp),
-                    onClick = { }) {
+                    onClick = { navController.navigate("home") }) {
                     Text("Login")
                 }
             }
@@ -115,8 +127,9 @@ fun LoginScreen() {
     }
 
 }
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun LoginScreenPreview(){
-    LoginScreen()
-}
+
+//@Preview(showBackground = true, showSystemUi = true)
+//@Composable
+//fun LoginScreenPreview() {
+//    LoginScreen()
+//}

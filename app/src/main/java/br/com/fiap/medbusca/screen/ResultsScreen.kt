@@ -24,10 +24,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun ResultsScreen() {
+fun ResultsScreen(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -72,7 +74,7 @@ fun ResultsScreen() {
                     modifier = Modifier
                         .padding(end = 10.dp)
                         .width(150.dp),
-                    onClick = { }) {
+                    onClick = { navController.navigate("home") }) {
                     Text("Nova Busca")
                 }
 
@@ -80,8 +82,8 @@ fun ResultsScreen() {
         }
     }
 }
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun SearchScreenPreview() {
-    ResultsScreen()
-}
+//@Preview(showBackground = true, showSystemUi = true)
+//@Composable
+//fun SearchScreenPreview() {
+//    ResultsScreen()
+//}
