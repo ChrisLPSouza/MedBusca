@@ -38,15 +38,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import br.com.fiap.medbusca.components.CampoDeTextoEditavel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun RegisterScreen(navController: NavController) {
-    var nomeReceita by remember{ mutableStateOf("") }
-    var medicamento by remember{ mutableStateOf("") }
-    var dataEmissao by remember{ mutableStateOf("") }
-    var posologia by remember{ mutableStateOf("") }
+    var nomeReceita by remember { mutableStateOf("") }
+    var medicamento by remember { mutableStateOf("") }
+    var dataEmissao by remember { mutableStateOf("") }
+    var posologia by remember { mutableStateOf("") }
 
     Scaffold(
         topBar = {
@@ -78,42 +79,37 @@ fun RegisterScreen(navController: NavController) {
                 .padding(top = 70.dp)
                 .fillMaxWidth()
         ) {
-
-            OutlinedTextField(
-                modifier = Modifier
-                    .padding(top = 16.dp, start = 16.dp, end = 16.dp)
-                    .fillMaxWidth(),
+            CampoDeTextoEditavel(
+                label = "Nome da Receita",
                 value = nomeReceita,
-                onValueChange = { nomeReceita = it },
-                label = { Text("Nome da Receita") }
-
+                placeHolder = "Nome da Receita",
+                atualizarTexto = {
+                    nomeReceita = it
+                }
             )
-
-            OutlinedTextField(
-                modifier = Modifier
-                    .padding(top = 8.dp, start = 16.dp, end = 16.dp)
-                    .fillMaxWidth(),
+            CampoDeTextoEditavel(
+                label = "Medicamento",
                 value = medicamento,
-                onValueChange = { medicamento = it },
-                label = { Text("Medicamento") }
+                placeHolder = "Medicamento",
+                atualizarTexto = {
+                    medicamento = it
+                }
             )
-
-            OutlinedTextField(
-                modifier = Modifier
-                    .padding(top = 8.dp, start = 16.dp, end = 16.dp)
-                    .fillMaxWidth(),
+            CampoDeTextoEditavel(
+                label = "Data de Emissão",
                 value = dataEmissao,
-                onValueChange = { dataEmissao = it },
-                label = { Text("Data de Emissão") }
+                placeHolder = "Data de Emissão",
+                atualizarTexto = {
+                    dataEmissao = it
+                }
             )
-
-            OutlinedTextField(
-                modifier = Modifier
-                    .padding(top = 8.dp, start = 16.dp, end = 16.dp)
-                    .fillMaxWidth(),
+            CampoDeTextoEditavel(
+                label = "Posologia",
                 value = posologia,
-                onValueChange = { posologia = it },
-                label = { Text("Posologia") }
+                placeHolder = "Posologia",
+                atualizarTexto = {
+                    posologia = it
+                }
             )
 
             Text(
@@ -124,26 +120,25 @@ fun RegisterScreen(navController: NavController) {
 
             )
             FlowRow(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .padding(top = 4.dp, start = 16.dp, end = 16.dp)
                     .align(Alignment.Start),
-                verticalArrangement = Arrangement.Center) {
+                verticalArrangement = Arrangement.Center
+            ) {
 
                 Checkbox(
                     checked = checkedState,
-                    onCheckedChange = { checkedState = it},
+                    onCheckedChange = { checkedState = it },
                     modifier = Modifier
                 )
-
                 Text(
                     modifier = Modifier
                         .align(alignment = Alignment.CenterVertically),
                     text = "Selecionar esta caixa se o tratamento for contínuo.",
                     fontSize = 12.sp
                 )
-
             }
-
 
             FlowRow(
                 modifier = Modifier
@@ -155,13 +150,13 @@ fun RegisterScreen(navController: NavController) {
             }
             Button(
                 modifier = Modifier
-                    .padding (start= 50.dp,bottom = 16.dp)
+                    .padding(start = 50.dp, bottom = 16.dp)
                     .width(290.dp),
                 onClick = { }) {
                 Text("Cadastrar")
             }
-            
-            
+
+
         }
     }
 

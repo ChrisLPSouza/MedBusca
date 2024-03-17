@@ -22,6 +22,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -54,24 +55,27 @@ fun ResultsScreen(
             )
         }
 
-    ) {  innerPadding ->
+    ) { innerPadding ->
         FlowColumn(
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier
                 .padding(top = 70.dp)
-                .fillMaxWidth()) {
+                .fillMaxWidth()
+        ) {
             Text(
                 modifier = Modifier
                     .padding(16.dp)
                     .fillMaxWidth(),
-                text = "Medicamento $nomeMedicamento encontrado nas seguintes farmácias perto de você:"
+                text = "${nomeMedicamento} encontrado(a) nas seguintes farmácias perto de você:"
 
             )
 
 
-            FlowRow(modifier = Modifier
-                .padding(top = 20.dp)
-                .align(Alignment.CenterHorizontally)) {
+            FlowRow(
+                modifier = Modifier
+                    .padding(top = 20.dp)
+                    .align(Alignment.CenterHorizontally)
+            ) {
 
                 OutlinedButton(
                     modifier = Modifier

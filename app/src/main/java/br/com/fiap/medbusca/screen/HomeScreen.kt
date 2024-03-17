@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowColumn
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -32,10 +33,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import br.com.fiap.medbusca.components.CampoDeTextoEditavel
+import br.com.fiap.medbusca.components.CardAlerta
 
 @RequiresApi(Build.VERSION_CODES.R)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -72,6 +76,7 @@ fun HomeScreen(navController: NavController) {
                 .padding(top = 70.dp)
                 .fillMaxWidth()
         ) {
+            Spacer(modifier = Modifier.height(16.dp))
             FlowRow() {
                 FlowColumn() {
                     Text(
@@ -91,6 +96,7 @@ fun HomeScreen(navController: NavController) {
                     }
                 }
             }
+            Spacer(modifier = Modifier.height(16.dp))
             FlowRow() {
                 Text(
                     modifier = Modifier
@@ -99,17 +105,18 @@ fun HomeScreen(navController: NavController) {
                     fontSize = 16.sp
                 )
             }
+            Spacer(modifier = Modifier.height(16.dp))
             FlowRow() {
-                OutlinedTextField(
-                    modifier = Modifier
-                        .padding(top = 16.dp, start = 16.dp, end = 16.dp)
-                        .fillMaxWidth(),
+                CampoDeTextoEditavel(
+                    label = "Onde tem?",
                     value = nomeMedicamento,
-                    onValueChange = { nomeMedicamento = it },
-                    label = { Text("Onde tem?") },
-                    placeholder = { Text("Digite aqui qual medicamento está procurando") }
+                    placeHolder = "Digite aqui qual medicamento está procurando",
+                    atualizarTexto = {
+                        nomeMedicamento = it
+                    }
                 )
             }
+            Spacer(modifier = Modifier.height(16.dp))
             FlowRow() {
                 OutlinedButton(
                     modifier = Modifier
@@ -119,6 +126,7 @@ fun HomeScreen(navController: NavController) {
                     Text("Buscar")
                 }
             }
+            Spacer(modifier = Modifier.height(16.dp))
             FlowRow() {
                 Text(
                     modifier = Modifier
@@ -127,40 +135,15 @@ fun HomeScreen(navController: NavController) {
                     fontSize = 16.sp
                 )
             }
+            Spacer(modifier = Modifier.height(16.dp))
             FlowRow() {
                 FlowColumn() {
-                    Card(
-                        modifier = Modifier
-                            .height(110.dp)
-                            .width(200.dp),
-                        colors = CardDefaults.cardColors(containerColor = Color.LightGray)
-                    ) {
-                        Text(
-                            modifier = Modifier
-                                .padding(start = 10.dp),
-                            text = "Sua receita vai vencer em 3 dias",
-                            fontSize = 16.sp
-                        )
-                    }
+                    CardAlerta(textCard = "Sua receita vai vencer em 3 dias")
                 }
                 FlowColumn() {
-                    Card(
-                        modifier = Modifier
-                            .height(110.dp)
-                            .width(200.dp),
-                        colors = CardDefaults.cardColors(containerColor = Color.Blue)
-                    ) {
-                        Text(
-                            modifier = Modifier
-                                .padding(start = 10.dp),
-                            text = "Tomar medicamento cefalexina às 18h",
-                            fontSize = 16.sp
-                        )
-                    }
+                    CardAlerta(textCard = "Tomar medicamento cefalexina às 18h")
                 }
             }
-
-
         }
     }
 }
