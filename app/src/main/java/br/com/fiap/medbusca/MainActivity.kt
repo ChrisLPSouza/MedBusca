@@ -40,8 +40,9 @@ class MainActivity : ComponentActivity() {
                         composable(route = "register") {
                             RegisterScreen(navController)
                         }
-                        composable(route = "results") {
-                            ResultsScreen(navController)
+                        composable(route = "results/{nomeMedicamento}") {
+                            var nomeMedicamento = it.arguments?.getString("nomeMedicamento")
+                            ResultsScreen(navController, nomeMedicamento!!)
                         }
                     }
                 }

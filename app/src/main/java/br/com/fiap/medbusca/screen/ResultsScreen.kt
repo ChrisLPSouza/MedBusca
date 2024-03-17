@@ -29,7 +29,10 @@ import androidx.navigation.NavController
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun ResultsScreen(navController: NavController) {
+fun ResultsScreen(
+    navController: NavController,
+    nomeMedicamento: String
+) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -61,7 +64,7 @@ fun ResultsScreen(navController: NavController) {
                 modifier = Modifier
                     .padding(16.dp)
                     .fillMaxWidth(),
-                text = "Medicamento encontrado nas seguintes farmácias perto de você:"
+                text = "Medicamento $nomeMedicamento encontrado nas seguintes farmácias perto de você:"
 
             )
 
