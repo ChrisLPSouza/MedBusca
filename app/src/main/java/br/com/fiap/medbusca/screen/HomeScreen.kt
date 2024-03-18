@@ -14,14 +14,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Create
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -32,8 +29,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -45,7 +40,8 @@ import br.com.fiap.medbusca.components.CardAlerta
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
-fun HomeScreen(navController: NavController) {
+
+fun HomeScreen(navController: NavController? = null) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -91,7 +87,7 @@ fun HomeScreen(navController: NavController) {
                         modifier = Modifier
                             .padding(start = 30.dp)
                             .width(150.dp),
-                        onClick = { navController.navigate("register") }) {
+                        onClick = { navController?.navigate("register") }) {
                         Text("Cadastrar")
                     }
                 }
@@ -122,7 +118,7 @@ fun HomeScreen(navController: NavController) {
                     modifier = Modifier
                         .padding(start = 30.dp)
                         .width(150.dp),
-                    onClick = { navController.navigate("results/$nomeMedicamento") }) {
+                    onClick = { navController?.navigate("results/$nomeMedicamento") }) {
                     Text("Buscar")
                 }
             }
@@ -148,9 +144,10 @@ fun HomeScreen(navController: NavController) {
     }
 }
 
-//@RequiresApi(Build.VERSION_CODES.R)
-//@Preview(showBackground = true, showSystemUi = true)
-//@Composable
-// HomeScreenPreview() {
-//    HomeScreen()
-//}
+@RequiresApi(Build.VERSION_CODES.R)
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+
+fun HomeScreenPreview() {
+    HomeScreen()
+}

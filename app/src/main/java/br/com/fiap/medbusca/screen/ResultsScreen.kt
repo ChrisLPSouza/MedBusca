@@ -30,15 +30,14 @@ import androidx.navigation.NavController
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun ResultsScreen(
-    navController: NavController,
-    nomeMedicamento: String
-) {
+
+fun ResultsScreen(navController: NavController? = null, nomeMedicamento: String = "") {
+
     Scaffold(
         topBar = {
             TopAppBar(
                 navigationIcon = {
-                    IconButton(onClick = { /* do something */ }) {
+                    IconButton(onClick = { navController?.popBackStack() }) {
                         Icon(
                             imageVector = Icons.Filled.Create,
                             contentDescription = "Localized description"
@@ -81,7 +80,7 @@ fun ResultsScreen(
                     modifier = Modifier
                         .padding(end = 10.dp)
                         .width(150.dp),
-                    onClick = { navController.navigate("home") }) {
+                    onClick = { navController?.navigate("home") }) {
                     Text("Nova Busca")
                 }
 

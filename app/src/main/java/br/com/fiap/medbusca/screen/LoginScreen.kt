@@ -1,8 +1,8 @@
 package br.com.fiap.medbusca.screen
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowColumn
 import androidx.compose.foundation.layout.FlowRow
@@ -35,13 +35,21 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import br.com.fiap.medbusca.model.Usuario
+import br.com.fiap.medbusca.service.RetrofitFactory
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
-fun LoginScreen(navController: NavController) {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+
+fun LoginScreen(navController: NavController? = null) {
+    var emailState by remember { mutableStateOf("") }
+    var senhaState by remember { mutableStateOf("") }
+    var usuarioState by remember { mutableStateOf<Usuario>(Usuario(0, "", "")) }
+    var statusLoginState by remember { mutableStateOf("") }
 
     Scaffold(
         topBar = {
@@ -69,8 +77,8 @@ fun LoginScreen(navController: NavController) {
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier
                 .padding(top = 70.dp)
-                .fillMaxWidth()
-        ) {
+
+                .fillMaxWidth()) {
             Text(
                 modifier = Modifier
                     .padding(16.dp)
@@ -83,33 +91,38 @@ fun LoginScreen(navController: NavController) {
                 modifier = Modifier
                     .padding(16.dp)
                     .fillMaxWidth(),
-                value = email,
-                onValueChange = { email = it },
+
+                value = emailState,
+                onValueChange = { emailState = it },
                 label = { Text("Email") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
             )
             OutlinedTextField(
                 modifier = Modifier
-                    .padding(16.dp)
+                    .padding(top = 16.dp, start = 16.dp, end = 16.dp)
                     .fillMaxWidth(),
-                value = password,
-                onValueChange = { password = it },
+                value = senhaState,
+                onValueChange = { senhaState = it },
+
                 label = { Text("Enter password") },
                 visualTransformation = PasswordVisualTransformation(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
             )
             Text(
                 modifier = Modifier
-                    .padding(16.dp)
-                    .fillMaxWidth(),
-                text = "Esqueceu a senha?"
 
+                    .padding(
+                        top = 8.dp,
+                        start = 16.dp,
+                        end = 16.dp,
+                        bottom = 16.dp)
+                    .fillMaxWidth(),
+                text = statusLoginState
             )
-            FlowRow(
-                modifier = Modifier
-                    .padding(top = 20.dp)
-                    .align(Alignment.CenterHorizontally)
-            ) {
+
+            FlowRow(modifier = Modifier
+                .padding(top = 20.dp)
+                .align(Alignment.CenterHorizontally)) {
 
                 OutlinedButton(
                     modifier = Modifier
@@ -120,7 +133,27 @@ fun LoginScreen(navController: NavController) {
                 }
                 Button(
                     modifier = Modifier.width(150.dp),
-                    onClick = { navController.navigate("home") }) {
+                    onClick = {
+                        statusLoginState = ""
+                        val user = Usuario(0, emailState, senhaState)
+                        val call = RetrofitFactory().getService().doLogin(user)
+
+                        call.enqueue(object : Callback<Usuario> {
+                            override fun onResponse(
+                                call: Call<Usuario>,
+                                response: Response<Usuario>
+                            ) {
+                                usuarioState = response.body()!!
+                                statusLoginState = "Sucesso, UserID: ${usuarioState.id}"
+                                navController?.navigate("receitas")
+                            }
+
+                            override fun onFailure(call: Call<Usuario>, t: Throwable) {
+                                statusLoginState = "Falha no login"
+                                Log.i("CHRIS", t.stackTrace.toString())
+                            }
+                        })
+                    }) {
                     Text("Login")
                 }
             }
@@ -129,8 +162,9 @@ fun LoginScreen(navController: NavController) {
 
 }
 
-//@Preview(showBackground = true, showSystemUi = true)
-//@Composable
-//fun LoginScreenPreview() {
-//    LoginScreen()
-//}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun LoginScreenPreview(){
+    LoginScreen()
+}

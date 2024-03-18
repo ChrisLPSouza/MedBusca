@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
                         composable(route = "home") {
                             HomeScreen(navController)
                         }
-                        composable(route = "home") {
+                        composable(route = "receitas") {
                             HomeReceitasScreen(navController)
                         }
                         composable(route = "register") {

@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
@@ -46,7 +47,7 @@ import br.com.fiap.medbusca.model.Receita
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
-fun RegisterScreen(navController: NavController) {
+fun RegisterScreen(navController: NavController? = null) {
 
     var context = LocalContext.current
     var receitaRepository = ReceitaRepository(context)
@@ -59,9 +60,9 @@ fun RegisterScreen(navController: NavController) {
         topBar = {
             TopAppBar(
                 navigationIcon = {
-                    IconButton(onClick = { /* do something */ }) {
+                    IconButton(onClick = { navController?.popBackStack() }) {
                         Icon(
-                            imageVector = Icons.Filled.Create,
+                            imageVector = Icons.Filled.ArrowBack,
                             contentDescription = "Localized description"
                         )
                     }
@@ -177,9 +178,9 @@ fun RegisterScreen(navController: NavController) {
     }
 
 }
-//@Preview(showBackground = true, showSystemUi = true)
-//@Composable
-//fun RegisterScreenPreview() {
-//    RegisterScreen()
-//}
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun RegisterScreenPreview() {
+    RegisterScreen()
+}
 

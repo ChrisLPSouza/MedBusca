@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -115,9 +116,9 @@ fun HomeReceitasScreen(navController: NavController? = null) {
         topBar = {
             TopAppBar(
                 navigationIcon = {
-                    IconButton(onClick = { /* do something */ }) {
+                    IconButton(onClick = { navController?.popBackStack() }) {
                         Icon(
-                            imageVector = Icons.Filled.Create,
+                            imageVector = Icons.Filled.ArrowBack,
                             contentDescription = "Localized description"
                         )
                     }
