@@ -33,17 +33,23 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.fiap.medbusca.components.CampoDeTextoEditavel
+import br.com.fiap.medbusca.database.repository.ReceitaRepository
+import br.com.fiap.medbusca.model.Receita
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun RegisterScreen(navController: NavController) {
+
+    var context = LocalContext.current
+    var receitaRepository = ReceitaRepository(context)
     var nomeReceita by remember { mutableStateOf("") }
     var medicamento by remember { mutableStateOf("") }
     var dataEmissao by remember { mutableStateOf("") }
@@ -152,7 +158,17 @@ fun RegisterScreen(navController: NavController) {
                 modifier = Modifier
                     .padding(start = 50.dp, bottom = 16.dp)
                     .width(290.dp),
-                onClick = { }) {
+                onClick = {
+                    val receita = Receita(
+                        id = 0,
+                        name = nomeReceita,
+                        medicine = medicamento,
+                        date = dataEmissao,
+                        dosage = posologia,
+                        continuosUse = checkedState
+                    )
+                    receitaRepository.salvar(receita)
+                }) {
                 Text("Cadastrar")
             }
 
