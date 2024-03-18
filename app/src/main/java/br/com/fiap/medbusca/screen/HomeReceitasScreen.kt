@@ -27,12 +27,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import br.com.fiap.medbusca.model.Receita
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeReceitas() {
+fun HomeReceitasScreen(navController: NavController? = null) {
     var listReceitaState = remember {
         mutableStateListOf<Receita>().apply {
             add(Receita(
@@ -145,8 +146,8 @@ fun HomeReceitas() {
 }
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun HomeReceitasPreview() {
-    HomeReceitas()
+fun HomeReceitasScreenPreview() {
+    HomeReceitasScreen()
 }
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
