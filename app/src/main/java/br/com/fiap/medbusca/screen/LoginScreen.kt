@@ -30,6 +30,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
@@ -47,6 +48,7 @@ fun LoginScreen() {
     var emailState by remember { mutableStateOf("") }
     var senhaState by remember { mutableStateOf("") }
     var usuarioState by remember { mutableStateOf<Usuario>(Usuario(0, "", "")) }
+    var statusLoginState by remember { mutableStateOf("") }
 
     Scaffold(
             topBar = {
@@ -73,22 +75,28 @@ fun LoginScreen() {
         FlowColumn(
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier
-            .padding(top = 70.dp)
-            .fillMaxWidth()) {
+                .padding(top = 70.dp)
+                .fillMaxWidth()) {
             Text(
-                modifier = Modifier.padding(16.dp).fillMaxWidth(),
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
                 text = "Bem-vindo ao Med!"
 
             )
             OutlinedTextField(
-                modifier = Modifier.padding(16.dp).fillMaxWidth(),
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
                 value = emailState,
                 onValueChange = { emailState = it },
                 label = { Text("Email") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
             )
             OutlinedTextField(
-                modifier = Modifier.padding(16.dp).fillMaxWidth(),
+                modifier = Modifier
+                    .padding(top = 16.dp, start = 16.dp, end = 16.dp)
+                    .fillMaxWidth(),
                 value = senhaState,
                 onValueChange = { senhaState = it },
                 label = { Text("Enter password") },
@@ -96,10 +104,23 @@ fun LoginScreen() {
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
             )
             Text(
-                modifier = Modifier.padding(16.dp).fillMaxWidth(),
-                text = "Esqueceu a senha?"
-
+                modifier = Modifier
+                    .padding(
+                        top = 8.dp,
+                        start = 16.dp,
+                        end = 16.dp,
+                        bottom = 16.dp)
+                    .fillMaxWidth(),
+                text = statusLoginState
             )
+
+//            Text(
+//                modifier = Modifier
+//                    .padding(16.dp)
+//                    .fillMaxWidth(),
+//                text = "Esqueceu a senha?"
+//
+//            )
             FlowRow(modifier = Modifier
                 .padding(top = 20.dp)
                 .align(Alignment.CenterHorizontally)) {
@@ -114,6 +135,7 @@ fun LoginScreen() {
                 Button(
                     modifier = Modifier.width(150.dp),
                     onClick = {
+                        statusLoginState = ""
                         val user = Usuario(0, emailState, senhaState)
                         val call = RetrofitFactory().getService().doLogin(user)
 
@@ -123,10 +145,12 @@ fun LoginScreen() {
                                 response: Response<Usuario>
                             ) {
                                 usuarioState = response.body()!!
+                                statusLoginState = "Sucesso, UserID: ${usuarioState.id}"
                                 Log.i("CHRIS", usuarioState.toString())
                             }
 
                             override fun onFailure(call: Call<Usuario>, t: Throwable) {
+                                statusLoginState = "Falha no login"
                                 Log.i("CHRIS", t.stackTrace.toString())
                             }
                         })
