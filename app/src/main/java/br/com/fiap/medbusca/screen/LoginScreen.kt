@@ -35,6 +35,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import br.com.fiap.medbusca.model.Usuario
 import br.com.fiap.medbusca.service.RetrofitFactory
 import retrofit2.Call
@@ -44,7 +45,7 @@ import retrofit2.Response
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
-fun LoginScreen() {
+fun LoginScreen(navController: NavController? = null) {
     var emailState by remember { mutableStateOf("") }
     var senhaState by remember { mutableStateOf("") }
     var usuarioState by remember { mutableStateOf<Usuario>(Usuario(0, "", "")) }
@@ -114,13 +115,6 @@ fun LoginScreen() {
                 text = statusLoginState
             )
 
-//            Text(
-//                modifier = Modifier
-//                    .padding(16.dp)
-//                    .fillMaxWidth(),
-//                text = "Esqueceu a senha?"
-//
-//            )
             FlowRow(modifier = Modifier
                 .padding(top = 20.dp)
                 .align(Alignment.CenterHorizontally)) {
@@ -146,7 +140,7 @@ fun LoginScreen() {
                             ) {
                                 usuarioState = response.body()!!
                                 statusLoginState = "Sucesso, UserID: ${usuarioState.id}"
-                                Log.i("CHRIS", usuarioState.toString())
+                                navController?.navigate("receitas")
                             }
 
                             override fun onFailure(call: Call<Usuario>, t: Throwable) {

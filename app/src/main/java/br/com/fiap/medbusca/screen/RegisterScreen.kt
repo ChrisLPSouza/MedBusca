@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
@@ -37,11 +38,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
-fun RegisterScreen() {
+fun RegisterScreen(navController: NavController? = null) {
     var nomeReceita by remember{ mutableStateOf("") }
     var medicamento by remember{ mutableStateOf("") }
     var dataEmissao by remember{ mutableStateOf("") }
@@ -51,9 +53,9 @@ fun RegisterScreen() {
         topBar = {
             TopAppBar(
                 navigationIcon = {
-                    IconButton(onClick = { /* do something */ }) {
+                    IconButton(onClick = { navController?.popBackStack() }) {
                         Icon(
-                            imageVector = Icons.Filled.Create,
+                            imageVector = Icons.Filled.ArrowBack,
                             contentDescription = "Localized description"
                         )
                     }

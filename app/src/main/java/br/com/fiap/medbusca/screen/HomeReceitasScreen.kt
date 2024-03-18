@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -27,12 +28,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import br.com.fiap.medbusca.model.Receita
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeReceitas() {
+fun HomeReceitasScreen(navController: NavController? = null) {
     var listReceitaState = remember {
         mutableStateListOf<Receita>().apply {
             add(Receita(
@@ -114,9 +116,9 @@ fun HomeReceitas() {
         topBar = {
             TopAppBar(
                 navigationIcon = {
-                    IconButton(onClick = { /* do something */ }) {
+                    IconButton(onClick = { navController?.popBackStack() }) {
                         Icon(
-                            imageVector = Icons.Filled.Create,
+                            imageVector = Icons.Filled.ArrowBack,
                             contentDescription = "Localized description"
                         )
                     }
@@ -145,8 +147,8 @@ fun HomeReceitas() {
 }
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun HomeReceitasPreview() {
-    HomeReceitas()
+fun HomeReceitasScreenPreview() {
+    HomeReceitasScreen()
 }
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
