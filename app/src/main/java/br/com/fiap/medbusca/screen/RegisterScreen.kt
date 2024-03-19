@@ -43,6 +43,7 @@ import androidx.navigation.NavController
 import br.com.fiap.medbusca.components.CampoDeTextoEditavel
 import br.com.fiap.medbusca.database.repository.ReceitaRepository
 import br.com.fiap.medbusca.model.Receita
+import br.com.fiap.medbusca.model.ReceitaX
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
@@ -162,13 +163,13 @@ fun RegisterScreen(navController: NavController? = null) {
                 onClick = {
                     val receita = Receita(
                         id = 0,
-                        name = nomeReceita,
-                        medicine = medicamento,
-                        date = dataEmissao,
-                        dosage = posologia,
-                        continuosUse = checkedState
+                        receita = nomeReceita,
+                        medicamento = medicamento,
+                        data = dataEmissao,
+                        posologia = posologia,
+                        usoContinuo = checkedState
                     )
-                    receitaRepository.salvar(receita)
+                    //receitaRepository.salvar(receita)
                 }) {
                 Text("Cadastrar")
             }

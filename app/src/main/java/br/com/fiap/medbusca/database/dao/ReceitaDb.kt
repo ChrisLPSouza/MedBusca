@@ -4,10 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import br.com.fiap.medbusca.model.Receita
+import br.com.fiap.medbusca.model.ReceitaX
 
 @Database(
-    entities = [Receita::class],
+    entities = [ReceitaX::class],
     version = 1
 )
 abstract class ReceitaDb: RoomDatabase() {
