@@ -66,7 +66,8 @@ import retrofit2.Response
 @Composable
 fun RegisterScreen(navController: NavController? = null) {
 
-    var context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    val context = LocalContext.current
     var receitaRepository = ReceitaRepository(context)
     var nomeReceita by remember { mutableStateOf("") }
     var medicamento by remember { mutableStateOf("") }
@@ -97,12 +98,12 @@ fun RegisterScreen(navController: NavController? = null) {
 
     ) { innerPadding ->
 
-        //val scope = remember { ShowDialog(receita = null, navController = null) }
+
 
         FlowColumn(
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier
-                .padding(top = 70.dp)
+                .padding(top = 62.dp)
                 .fillMaxWidth()
         ) {
             CampoDeTextoEditavel(
@@ -140,7 +141,7 @@ fun RegisterScreen(navController: NavController? = null) {
 
             Text(
                 modifier = Modifier
-                    .padding(top = 16.dp, start = 16.dp, end = 16.dp)
+                    .padding(top = 8.dp, start = 16.dp, end = 16.dp)
                     .fillMaxWidth(),
                 text = "Uso Contínuo?"
 
@@ -176,8 +177,8 @@ fun RegisterScreen(navController: NavController? = null) {
             }
             Button(
                 modifier = Modifier
-                    .padding(start = 50.dp, bottom = 16.dp)
-                    .width(290.dp),
+                    .padding(start = 36.dp, end = 36.dp)
+                    .fillMaxWidth(),
                 onClick = {
 //                    val receita = Receita(
 //                        id = 0,
@@ -188,9 +189,7 @@ fun RegisterScreen(navController: NavController? = null) {
 //                        usoContinuo = usoContinuo
 //                    )
                     //receitaRepository.salvar(receita)
-
-                    CoroutineScope(Dispatchers.Main).launch {
-
+                    scope.launch {
                         val receita = Receita(
                             0,
                             nomeReceita,
@@ -199,8 +198,7 @@ fun RegisterScreen(navController: NavController? = null) {
                             posologia,
                             usoContinuo)
 
-
-                        withContext(Dispatchers.IO){
+                        withContext(Dispatchers.IO) {
                             val call = RetrofitFactory().getService().cadastraReceita(receita)
 
                             call.enqueue(object : Callback<Receita> {
@@ -213,12 +211,42 @@ fun RegisterScreen(navController: NavController? = null) {
                                 }
 
                                 override fun onFailure(call: Call<Receita>, t: Throwable) {
-
                                     Log.i("CHRIS", t.stackTrace.toString())
                                 }
                             })
                         }
                     }
+
+//                    CoroutineScope(Dispatchers.Main).launch {
+//
+//                        val receita = Receita(
+//                            0,
+//                            nomeReceita,
+//                            medicamento,
+//                            dataEmissao,
+//                            posologia,
+//                            usoContinuo)
+//
+//
+//                        withContext(Dispatchers.IO){
+//                            val call = RetrofitFactory().getService().cadastraReceita(receita)
+//
+//                            call.enqueue(object : Callback<Receita> {
+//                                override fun onResponse(
+//                                    call: Call<Receita>,
+//                                    response: Response<Receita>
+//                                ) {
+//                                    val result = response.body()!!
+//                                    navController?.navigate("receitas")
+//                                }
+//
+//                                override fun onFailure(call: Call<Receita>, t: Throwable) {
+//
+//                                    Log.i("CHRIS", t.stackTrace.toString())
+//                                }
+//                            })
+//                        }
+//                    }
 
                 }) {
                 Text("Cadastrar")

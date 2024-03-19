@@ -27,7 +27,7 @@ fun CampoDeTextoEditavel(
             Text(text = placeHolder)
         },
         modifier = Modifier
-            .padding(top = 16.dp, start = 16.dp, end = 16.dp)
+            .padding(top = 2.dp, start = 8.dp, end = 8.dp, bottom = 2.dp)
             .fillMaxWidth(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
     )

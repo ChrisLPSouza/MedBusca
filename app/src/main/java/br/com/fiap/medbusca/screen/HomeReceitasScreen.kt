@@ -155,7 +155,6 @@ fun HomeReceitasScreen(navController: NavController? = null) {
 
     ) {
         //Spacer(modifier = Modifier.padding(top = 50.dp))
-        //ReceitaItem()
         LazyColumn() {
             items(listReceitaState.size) { index ->
                 ReceitaItem(listReceitaState[index])

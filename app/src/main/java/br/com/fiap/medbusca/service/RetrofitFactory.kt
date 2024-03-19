@@ -9,7 +9,7 @@ class RetrofitFactory {
 
     // USANDO CELULAR FISICO
     // IP DA MAQUINA ou LOCALHOST
-    private val URL = "http://192.168.2.3:8080/"
+    private val URL = "http://192.168.15.29:8080/"
     private val retrofitFactory = Retrofit
         .Builder()
         .baseUrl(URL)
