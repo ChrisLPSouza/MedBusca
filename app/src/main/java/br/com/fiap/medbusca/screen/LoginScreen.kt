@@ -145,7 +145,7 @@ fun LoginScreen(navController: NavController? = null) {
                             ) {
                                 usuarioState = response.body()!!
                                 statusLoginState = "Sucesso, UserID: ${usuarioState.id}"
-                                navController?.navigate("receitas")
+                                navController?.navigate("home")
                             }
 
                             override fun onFailure(call: Call<Usuario>, t: Throwable) {
