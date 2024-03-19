@@ -136,6 +136,7 @@ fun HomeScreen(navController: NavController? = null) {
                 FlowColumn() {
                     CardAlerta(textCard = "Sua receita vai vencer em 3 dias")
                 }
+                Spacer(modifier = Modifier.width(16.dp))
                 FlowColumn() {
                     CardAlerta(textCard = "Tomar medicamento cefalexina às 18h")
                 }
