@@ -6,6 +6,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.HTTP
+import retrofit2.http.POST
 
 interface Service {
     //@GET("/api/usuario/login")
@@ -16,4 +17,6 @@ interface Service {
     @GET("/api/receita")
     fun getReceita() : Call<List<Receita>>
 
+    @POST("/api/receita/cadastra")
+    fun cadastraReceita(@Body receita: Receita) : Call<Receita>
 }

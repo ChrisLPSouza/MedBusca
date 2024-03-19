@@ -4,7 +4,9 @@ import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -13,6 +15,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -54,7 +58,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun HomeReceitasScreen(navController: NavController? = null) {
 
@@ -131,6 +135,22 @@ fun HomeReceitasScreen(navController: NavController? = null) {
                     Text("Home Receitas")
                 }
             )
+        },
+        bottomBar = {
+            BottomAppBar(modifier = Modifier.padding(top = 60.dp)) {
+                FlowRow(modifier = Modifier) {
+                    Button(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 16.dp, end = 16.dp),
+                        onClick = {
+                            navController?.navigate("register")
+                        }) {
+                        Text("Cadastrar Receita")
+                    }
+                }
+            }
+
         }
 
     ) {
@@ -164,7 +184,7 @@ fun ReceitaItem(receita : Receita){
         Text(
             modifier = Modifier
                 .padding(start = 10.dp, end = 10.dp),
-            text = receita.medicamento,
+            text = receita.receita,
             fontSize = 15.sp
         )
         OutlinedButton(
