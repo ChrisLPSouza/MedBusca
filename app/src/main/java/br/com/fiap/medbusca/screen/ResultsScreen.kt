@@ -1,15 +1,22 @@
 package br.com.fiap.medbusca.screen
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowColumn
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Create
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -22,10 +29,13 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import br.com.fiap.medbusca.database.repository.getAllFarmacias
+import br.com.fiap.medbusca.database.repository.getFarmaciasPorMedicamento
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
@@ -68,6 +78,25 @@ fun ResultsScreen(navController: NavController? = null, nomeMedicamento: String 
                 text = "${nomeMedicamento} encontrado(a) nas seguintes farmácias perto de você:"
 
             )
+
+            Spacer(modifier = Modifier.height(16.dp))
+            LazyColumn(){
+                items(getFarmaciasPorMedicamento(nomeMedicamento)){
+                    Card( modifier = Modifier.fillMaxWidth(),
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary)){
+                        FlowRow {
+                            Text(text = "${it.nomeFarmacia}")
+                        }
+                        FlowRow {
+                            Text(text = "Endereço - ${it.endereco}")
+                        }
+                        FlowRow {
+                            Text(text = "Horário de funcionamento - ${it.horarioFuncionamento}")
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
+                }
+            }
 
 
             FlowRow(
