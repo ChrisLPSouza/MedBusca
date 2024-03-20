@@ -13,6 +13,8 @@ interface Service {
     @HTTP(method = "POST", path = "/api/usuario/login", hasBody = true)
     fun doLogin(@Body usuario: Usuario) : Call<Usuario>
 
+    @HTTP(method = "POST", path = "/api/usuario/cadastra", hasBody = true)
+    fun cadastraUsuario(@Body usuario: Usuario): Call<Usuario>
 
     @GET("/api/receita")
     fun getReceita() : Call<List<Receita>>
