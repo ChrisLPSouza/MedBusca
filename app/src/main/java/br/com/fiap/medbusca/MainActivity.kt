@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import br.com.fiap.medbusca.screen.HomeReceitasScreen
+import br.com.fiap.medbusca.screen.ReceitasScreen
 import br.com.fiap.medbusca.screen.HomeScreen
 import br.com.fiap.medbusca.screen.LoginScreen
 import br.com.fiap.medbusca.screen.RegisterScreen
@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
                             HomeScreen(navController)
                         }
                         composable(route = "receitas") {
-                            HomeReceitasScreen(navController)
+                            ReceitasScreen(navController)
                         }
                         composable(route = "register") {
                             RegisterScreen(navController)

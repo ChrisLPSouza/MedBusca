@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowColumn
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -28,6 +29,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -73,15 +75,13 @@ fun HomeScreen(navController: NavController? = null) {
                 .fillMaxWidth()
         ) {
             Spacer(modifier = Modifier.height(16.dp))
-            FlowRow() {
-                FlowColumn() {
-                    Text(
-                        modifier = Modifier
-                            .padding(start = 10.dp),
-                        text = "Minhas receitas",
-                        fontSize = 16.sp
-                    )
-                }
+            Row(modifier = Modifier.fillMaxWidth().padding(start = 16.dp, end = 16.dp)) {
+                Text(
+                    modifier = Modifier
+                        .padding(start = 10.dp).align(Alignment.CenterVertically),
+                    text = "Minhas receitas",
+                    fontSize = 16.sp
+                )
                 FlowColumn() {
                     OutlinedButton(
                         modifier = Modifier
@@ -113,7 +113,7 @@ fun HomeScreen(navController: NavController? = null) {
                 )
             }
             Spacer(modifier = Modifier.height(16.dp))
-            FlowRow() {
+            FlowRow(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
                 OutlinedButton(
                     modifier = Modifier
                         .padding(start = 30.dp)
@@ -126,13 +126,13 @@ fun HomeScreen(navController: NavController? = null) {
             FlowRow() {
                 Text(
                     modifier = Modifier
-                        .padding(start = 10.dp),
+                        .padding(start = 16.dp),
                     text = "Próximas ações e alertas",
                     fontSize = 16.sp
                 )
             }
             Spacer(modifier = Modifier.height(16.dp))
-            FlowRow() {
+            FlowRow(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
                 FlowColumn() {
                     CardAlerta(textCard = "Sua receita vai vencer em 3 dias")
                 }

@@ -6,14 +6,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
@@ -27,34 +25,27 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.solver.state.helpers.AlignHorizontallyReference
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavController
 import br.com.fiap.medbusca.model.Receita
-import br.com.fiap.medbusca.model.Usuario
 import br.com.fiap.medbusca.service.RetrofitFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -62,7 +53,7 @@ import retrofit2.Response
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
-fun HomeReceitasScreen(navController: NavController? = null) {
+fun ReceitasScreen(navController: NavController? = null) {
 
     val lifecycleOwner by rememberUpdatedState(LocalLifecycleOwner.current)
     var listReceitaState by remember { mutableStateOf<MutableList<Receita>>(mutableListOf()) }
@@ -92,7 +83,14 @@ fun HomeReceitasScreen(navController: NavController? = null) {
     Scaffold(Modifier.fillMaxWidth(),
         topBar = {
             TopAppBar(
-
+                navigationIcon = {
+                    IconButton(onClick = { navController?.navigate("home") }) {
+                        Icon(
+                            imageVector = Icons.Filled.ArrowBack,
+                            contentDescription = "Localized description"
+                        )
+                    }
+                },
                 actions = {
                           IconButton(onClick = {
                               CoroutineScope(Dispatchers.Main).launch {
@@ -128,7 +126,7 @@ fun HomeReceitasScreen(navController: NavController? = null) {
                     titleContentColor = MaterialTheme.colorScheme.primary,
                 ),
                 title = {
-                    Text("Home Receitas")
+                    Text("Receitas")
                 }
             )
         },
@@ -163,7 +161,7 @@ fun HomeReceitasScreen(navController: NavController? = null) {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun HomeReceitasScreenPreview() {
-    HomeReceitasScreen()
+    ReceitasScreen()
 }
 @OptIn(ExperimentalLayoutApi::class)
 @Composable

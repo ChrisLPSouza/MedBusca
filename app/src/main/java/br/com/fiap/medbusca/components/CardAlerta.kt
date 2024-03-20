@@ -18,8 +18,8 @@ import androidx.compose.ui.unit.sp
 fun CardAlerta(textCard: String) {
     Card(
         modifier = Modifier
-            .height(110.dp)
-            .width(170.dp),
+            .height(106.dp)
+            .width(160.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary),
     ) {
         Text(
