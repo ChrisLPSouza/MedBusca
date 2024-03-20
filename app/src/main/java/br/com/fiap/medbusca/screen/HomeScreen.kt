@@ -118,7 +118,7 @@ fun HomeScreen(navController: NavController? = null) {
                     modifier = Modifier
                         .padding(start = 30.dp)
                         .width(150.dp),
-                    onClick = { navController?.navigate("results/$nomeMedicamento") }) {
+                    onClick = {  }) {
                     Text("Buscar")
                 }
             }
