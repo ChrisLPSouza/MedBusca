@@ -46,8 +46,8 @@ import retrofit2.Response
 @Composable
 
 fun LoginScreen(navController: NavController? = null) {
-    var emailState by remember { mutableStateOf("") }
-    var senhaState by remember { mutableStateOf("") }
+    var emailState by remember { mutableStateOf("teste@mail.com") }
+    var senhaState by remember { mutableStateOf("1234") }
     var usuarioState by remember { mutableStateOf<Usuario>(Usuario(0, "", "")) }
     var statusLoginState by remember { mutableStateOf("") }
 
