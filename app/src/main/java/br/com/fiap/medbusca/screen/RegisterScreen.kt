@@ -162,33 +162,16 @@ fun RegisterScreen(navController: NavController? = null) {
                 Text(
                     modifier = Modifier
                         .align(alignment = Alignment.CenterVertically),
-                    text = "Selecionar esta caixa se o tratamento for contínuo.",
+                    text = "Selecionar se o tratamento for contínuo.",
                     fontSize = 12.sp
                 )
             }
 
-            FlowRow(
-                modifier = Modifier
-                    .padding(top = 20.dp)
-                    .align(Alignment.CenterHorizontally)
-            ) {
-
-
-            }
             Button(
                 modifier = Modifier
                     .padding(start = 36.dp, end = 36.dp)
                     .fillMaxWidth(),
                 onClick = {
-//                    val receita = Receita(
-//                        id = 0,
-//                        receita = nomeReceita,
-//                        medicamento = medicamento,
-//                        data = dataEmissao,
-//                        posologia = posologia,
-//                        usoContinuo = usoContinuo
-//                    )
-                    //receitaRepository.salvar(receita)
                     scope.launch {
                         val receita = Receita(
                             0,
@@ -211,42 +194,11 @@ fun RegisterScreen(navController: NavController? = null) {
                                 }
 
                                 override fun onFailure(call: Call<Receita>, t: Throwable) {
-                                    Log.i("CHRIS", t.stackTrace.toString())
+                                    Log.i("MEDBUSCA", t.stackTrace.toString())
                                 }
                             })
                         }
                     }
-
-//                    CoroutineScope(Dispatchers.Main).launch {
-//
-//                        val receita = Receita(
-//                            0,
-//                            nomeReceita,
-//                            medicamento,
-//                            dataEmissao,
-//                            posologia,
-//                            usoContinuo)
-//
-//
-//                        withContext(Dispatchers.IO){
-//                            val call = RetrofitFactory().getService().cadastraReceita(receita)
-//
-//                            call.enqueue(object : Callback<Receita> {
-//                                override fun onResponse(
-//                                    call: Call<Receita>,
-//                                    response: Response<Receita>
-//                                ) {
-//                                    val result = response.body()!!
-//                                    navController?.navigate("receitas")
-//                                }
-//
-//                                override fun onFailure(call: Call<Receita>, t: Throwable) {
-//
-//                                    Log.i("CHRIS", t.stackTrace.toString())
-//                                }
-//                            })
-//                        }
-//                    }
 
                 }) {
                 Text("Cadastrar")
@@ -254,31 +206,6 @@ fun RegisterScreen(navController: NavController? = null) {
 
         }
     }
-}
-
-@Composable
-private fun ShowDialog(receita: Receita, navController: NavController?) {
-    AlertDialog(
-        title = {
-            Text(text = "Sucesso")
-        },
-        text = {
-            Text(text = "Receita: ${receita.receita}, cadastrado")
-        },
-        onDismissRequest = {
-
-        },
-        confirmButton = {
-            TextButton(
-                onClick = {
-                    navController?.navigate("receitas")
-                }
-            ) {
-                Text("Ir para receitas")
-            }
-        },
-
-    )
 }
 
 @Preview(showBackground = true, showSystemUi = true)

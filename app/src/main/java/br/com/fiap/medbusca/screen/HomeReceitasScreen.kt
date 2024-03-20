@@ -41,6 +41,7 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.solver.state.helpers.AlignHorizontallyReference
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
@@ -53,6 +54,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -75,13 +77,10 @@ fun HomeReceitasScreen(navController: NavController? = null) {
                     response: Response<List<Receita>>
                 ) {
                      listReceitaState = response.body()?.toMutableList()!!
-                    Log.i("CHRIS", "")
-                    //navController?.navigate("receitas")
                 }
 
                 override fun onFailure(call: Call<List<Receita>>, t: Throwable) {
-
-                    Log.i("CHRIS", t.stackTrace.toString())
+                    Log.i("MEDBUSCA", t.stackTrace.toString())
                 }
             })
         }
@@ -109,13 +108,10 @@ fun HomeReceitasScreen(navController: NavController? = null) {
                                               response: Response<List<Receita>>
                                           ) {
                                               listReceitaState = response.body()?.toMutableList()!!
-                                              Log.i("CHRIS", "")
-                                              //navController?.navigate("receitas")
                                           }
 
                                           override fun onFailure(call: Call<List<Receita>>, t: Throwable) {
-
-                                              Log.i("CHRIS", t.stackTrace.toString())
+                                              Log.i("MEDBUSCA", t.stackTrace.toString())
                                           }
                                       })
                                   }
@@ -154,8 +150,7 @@ fun HomeReceitasScreen(navController: NavController? = null) {
         }
 
     ) {
-        //Spacer(modifier = Modifier.padding(top = 50.dp))
-        LazyColumn() {
+        LazyColumn(modifier = Modifier.padding(top = 62.dp)) {
             items(listReceitaState.size) { index ->
                 ReceitaItem(listReceitaState[index])
             }
@@ -175,14 +170,14 @@ fun HomeReceitasScreenPreview() {
 fun ReceitaItem(receita : Receita){
     Row(
         modifier = Modifier
-            .padding(top = 70.dp)
+            .padding(top = 16.dp)
             .fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
+
         horizontalArrangement = Arrangement.Start){
 
         Text(
             modifier = Modifier
-                .padding(start = 10.dp, end = 10.dp),
+                .padding(start = 10.dp, end = 8.dp).align(Alignment.CenterVertically),
             text = receita.receita,
             fontSize = 15.sp
         )

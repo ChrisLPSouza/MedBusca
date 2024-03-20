@@ -54,8 +54,8 @@ import retrofit2.Response
 
 fun LoginScreen(navController: NavController? = null) {
     val scope = rememberCoroutineScope()
-    var emailState by remember { mutableStateOf("") }
-    var senhaState by remember { mutableStateOf("") }
+    var emailState by remember { mutableStateOf("teste@mail.com") }
+    var senhaState by remember { mutableStateOf("1234") }
     var usuarioState by remember { mutableStateOf<Usuario>(Usuario(0, "", "", false)) }
     var statusLoginState by remember { mutableStateOf("") }
 
@@ -162,7 +162,7 @@ fun LoginScreen(navController: NavController? = null) {
 
                                     override fun onFailure(call: Call<Usuario>, t: Throwable) {
                                         statusLoginState = "Falha ao registrar"
-                                        Log.i("CHRIS", t.stackTrace.toString())
+                                        Log.i("MEDBUSCA", t.stackTrace.toString())
                                     }
                                 })
                             }
@@ -189,7 +189,7 @@ fun LoginScreen(navController: NavController? = null) {
 
                             override fun onFailure(call: Call<Usuario>, t: Throwable) {
                                 statusLoginState = "Falha no login"
-                                Log.i("CHRIS", t.stackTrace.toString())
+                                Log.i("MEDBUSCA", t.stackTrace.toString())
                             }
                         })
                     }) {
@@ -199,32 +199,6 @@ fun LoginScreen(navController: NavController? = null) {
         }
     }
 
-}
-
-@Composable
-private fun ShowDialog(usuario: Usuario, navController: NavController?) {
-    AlertDialog(
-        title = {
-            Text(text = "Sucesso")
-        },
-        text = {
-            Text(text = "Usuario: ${usuario.email}, cadastrado")
-        },
-        onDismissRequest = {
-
-        },
-        confirmButton = {
-            TextButton(
-                onClick = {
-                    //navController?.navigate("login")
-
-                }
-            ) {
-                Text("Fechar")
-            }
-        },
-
-        )
 }
 
 @Preview(showBackground = true, showSystemUi = true)
